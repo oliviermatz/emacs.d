@@ -18,20 +18,6 @@
 (require 'f)
 (require 'async)
 
-;; (defun add-to-path (s)
-;;   (setenv "PATH" (concat (getenv "PATH") ":" s))
-;;   (setq exec-path (append exec-path (list s))))
-
-;; (-each (list (concat (getenv "HOME") "/.local/bin")
-;;              "/usr/local/bin")
-;;   #'add-to-path)
-
-(-each (->> (s-lines (shell-command-to-string "env"))
-            (-map (-partial #'s-match "^\\([^=]+\\)=\\(.*\\)$"))
-            (-filter #'identity))
-  (lambda (args)
-    (setenv (cadr args) (caddr args))))
-
 (require 'material-theme)
 (load-theme 'material t)
 
@@ -41,6 +27,7 @@
 (require 'markdown-mode)
 (require 'graphql-mode)
 (require 'rainbow-delimiters)
+(require 'exec-path-from-shell)
 (require 'vterm)
 (require 'paredit)
 (require 'magit)

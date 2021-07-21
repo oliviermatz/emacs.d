@@ -61,3 +61,6 @@
 [submodule "external-lisp/emacs-material-theme"]
 	path = external-lisp/emacs-material-theme
 	url = https://github.com/cpaulik/emacs-material-theme.git
+[submodule "external-lisp/exec-path-from-shell"]
+	path = external-lisp/exec-path-from-shell
+	url = https://github.com/purcell/exec-path-from-shell.git
