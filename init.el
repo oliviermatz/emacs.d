@@ -35,6 +35,7 @@
 (require 'vterm)
 (require 'paredit)
 (require 'magit)
+(require 'back-button)
 
 (require 'yaml-mode)
 (add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))

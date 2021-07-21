@@ -64,3 +64,6 @@
 [submodule "external-lisp/exec-path-from-shell"]
 	path = external-lisp/exec-path-from-shell
 	url = https://github.com/purcell/exec-path-from-shell.git
+[submodule "external-lisp/back-button"]
+	path = external-lisp/back-button
+	url = https://github.com/rolandwalker/back-button.git

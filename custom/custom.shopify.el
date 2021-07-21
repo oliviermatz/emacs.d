@@ -33,7 +33,7 @@
   (set-window-dedicated-p (get-buffer-window) t)
   (my/switch-to-win-config 3)
   (my/rename-current-win-config "http")
-  (find-file "~/dev/queries/create_business.http")
+  (find-file "~/dev/queries.http")
   (my/switch-to-win-config 4)
   (my/rename-current-win-config "org")
   (find-file "~/org/doing.org")
