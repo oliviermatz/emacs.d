@@ -27,7 +27,7 @@
 (require 'exec-path-from-shell)
 (exec-path-from-shell-initialize)
 
-(setenv "NIX_SSL_CERT_FILE" "/Users/oliviermatz/.nix-profile/etc/ssl/certs/ca-bundle.crt") 
+(setenv "NIX_SSL_CERT_FILE" "/Users/oliviermatz/.nix-profile/etc/ssl/certs/ca-bundle.crt")
 
 (require 'markdown-mode)
 (require 'graphql-mode)
@@ -154,5 +154,14 @@
 
 (global-set-key (kbd "C-c t n") 'my/vterm)
 (global-set-key (kbd "C-c t b") 'my/vterm-switch-to-buffer)
+
+(setq-default mode-line-format
+              (list
+               (propertize "%m" 'face '(:weight thin :foreground "grey"))
+               " "
+               ;; value of current buffer name
+               "%b@%l:%c "
+               ;; value of current line number
+               '(:eval (my/win-config-status-line))))
 
 (load "~/.emacs.d/custom.el")

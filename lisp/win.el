@@ -67,12 +67,12 @@
     (-dotimes 10
       (lambda (n)
         (-if-let (wc (aref my/win-config-store n))
-            (add-to-list 'parts
-                         (format
-                          (if (= n my/win-config-current) "*%d:%s" "%d:%s")
-                          n
-                          (win-config-label wc))
-                         t))))
+            (let ((s (format "%d:%s" n (win-config-label wc))))
+              (add-to-list 'parts
+                           (if (= n my/win-config-current)
+                               (propertize s 'face '(:weight bold :foreground "cyan"))
+                             s)
+                           t)))))
     (string-join parts " ")))
 
 (-dotimes 10
