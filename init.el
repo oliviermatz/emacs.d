@@ -24,10 +24,14 @@
 (require 'which-key)
 (which-key-mode)
 
+(require 'exec-path-from-shell)
+(exec-path-from-shell-initialize)
+
+(setenv "NIX_SSL_CERT_FILE" "/Users/oliviermatz/.nix-profile/etc/ssl/certs/ca-bundle.crt") 
+
 (require 'markdown-mode)
 (require 'graphql-mode)
 (require 'rainbow-delimiters)
-(require 'exec-path-from-shell)
 (require 'vterm)
 (require 'paredit)
 (require 'magit)
