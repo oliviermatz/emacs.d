@@ -1,0 +1,30 @@
+;;; -*- lexical-binding: t -*-
+
+(server-start)
+
+(load "~/.emacs.d/lisp/emacs-lisp.el")
+(load "~/.emacs.d/lisp/misc.el")
+(load "~/.emacs.d/lisp/project.el")
+(load "~/.emacs.d/lisp/win.el")
+(load "~/.emacs.d/lisp/ruby.el")
+
+(defun my/setup-windows ()
+  (interactive)
+  (my/switch-to-win-config 1)
+  (my/rename-current-win-config "code")
+  (split-window-right)
+  (windmove-right)
+  (split-window-below)
+  (windmove-down)
+  (vterm "*vterm-shell*")
+  (set-window-dedicated-p (get-buffer-window) t)
+  (my/switch-to-win-config 2)
+  (my/rename-current-win-config "logs")
+  (find-file "/opt/dev/var/log")
+  (my/switch-to-win-config 3)
+  (my/rename-current-win-config "term")
+  (vterm "*vterm-server*")
+  (vterm "*vterm-worker*")
+  (my/switch-to-win-config 1))
+
+(my/setup-windows)

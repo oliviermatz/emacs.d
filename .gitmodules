@@ -1,0 +1,63 @@
+[submodule "external-lisp/dash.el"]
+	path = external-lisp/dash.el
+	url = https://github.com/magnars/dash.el.git
+[submodule "external-lisp/f.el"]
+	path = external-lisp/f.el
+	url = https://github.com/rejeep/f.el.git
+[submodule "external-lisp/s.el"]
+	path = external-lisp/s.el
+	url = https://github.com/magnars/s.el.git
+[submodule "external-lisp/emacs-async"]
+	path = external-lisp/emacs-async
+	url = https://github.com/jwiegley/emacs-async.git
+[submodule "external-lisp/emacs-libvterm"]
+	path = external-lisp/emacs-libvterm
+	url = https://github.com/akermu/emacs-libvterm
+[submodule "external-lisp/vertico"]
+	path = external-lisp/vertico
+	url = https://github.com/minad/vertico.git
+[submodule "external-lisp/orderless"]
+	path = external-lisp/orderless
+	url = https://github.com/oantolin/orderless.git
+[submodule "external-lisp/magit"]
+	path = external-lisp/magit
+	url = https://github.com/magit/magit.git
+[submodule "external-lisp/with-editor"]
+	path = external-lisp/with-editor
+	url = https://github.com/magit/with-editor.git
+[submodule "external-lisp/transient"]
+	path = external-lisp/transient
+	url = https://github.com/magit/transient.git
+[submodule "external-lisp/graphql-mode"]
+	path = external-lisp/graphql-mode
+	url = https://github.com/davazp/graphql-mode.git
+[submodule "external-lisp/bookmark-plus"]
+	path = external-lisp/bookmark-plus
+	url = https://github.com/emacsmirror/bookmark-plus.git
+[submodule "external-lisp/emacs-which-key"]
+	path = external-lisp/emacs-which-key
+	url = https://github.com/justbur/emacs-which-key.git
+[submodule "external-lisp/inf-ruby"]
+	path = external-lisp/inf-ruby
+	url = https://github.com/nonsequitur/inf-ruby.git
+[submodule "external-lisp/markdown-mode"]
+	path = external-lisp/markdown-mode
+	url = https://github.com/jrblevin/markdown-mode.git
+[submodule "external-lisp/org-bullets"]
+	path = external-lisp/org-bullets
+	url = https://github.com/integral-dw/org-bullets.git
+[submodule "external-lisp/rainbow-delimiters"]
+	path = external-lisp/rainbow-delimiters
+	url = https://github.com/Fanael/rainbow-delimiters.git
+[submodule "external-lisp/restclient.el"]
+	path = external-lisp/restclient.el
+	url = https://github.com/pashky/restclient.el.git
+[submodule "external-lisp/yaml-mode"]
+	path = external-lisp/yaml-mode
+	url = https://github.com/yoshiki/yaml-mode.git
+[submodule "external-lisp/ledger-mode"]
+	path = external-lisp/ledger-mode
+	url = https://github.com/ledger/ledger-mode.git
+[submodule "external-lisp/emacs-material-theme"]
+	path = external-lisp/emacs-material-theme
+	url = https://github.com/cpaulik/emacs-material-theme.git
