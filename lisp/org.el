@@ -2,7 +2,7 @@
 
 (require 'org-bullets)
 
-(defvar org-notes-dir "~/org/")
+(defvar org-notes-dir (concat (getenv "HOME") "/org"))
 
 (setq org-agenda-start-with-follow-mode t)
 
@@ -43,6 +43,14 @@
 (defun my/org-mode-initialize ()
   (org-bullets-mode 1)
   (add-hook 'after-save-hook 'my/org-mode-sync t t))
+
+(defun my/org-mode-new-loose-sheet ()
+  (interactive)
+  (let ((dir (pcase (calendar-current-date)
+               (`(,day ,month ,year)
+                (format "%s/notes/%d/%02d/%02d" org-notes-dir year month day)))))
+    (shell-command-to-string (concat "mkdir -p " dir))
+    (find-file (concat dir "/" (car (s-match "[0-9]+:[0-9]+:[0-9]+" (current-time-string))) ".org"))))
 
 (add-hook 'org-mode-hook 'my/org-mode-initialize)
 
