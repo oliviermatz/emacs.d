@@ -159,9 +159,7 @@
               (list
                (propertize "%m" 'face '(:weight thin :foreground "grey"))
                " "
-               ;; value of current buffer name
                "%b@%l:%c "
-               ;; value of current line number
                '(:eval (my/win-config-status-line))))
 
 (load "~/.emacs.d/custom.el")
