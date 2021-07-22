@@ -16,7 +16,11 @@
          "* %?")))
 
 (setq org-todo-keywords
-      '((sequence "TODO(t)" "|" "INPROGRESS(p!)" "|" "ONHOLD(h@/!)" "|" "DONE(d!)" "|" "IDEA(i)")))
+      '((sequence "TODO(t)" "|"
+                  "INPROGRESS(p!)" "|"
+                  "ONHOLD(h@/!)" "|"
+                  "DONE(d!)" "|"
+                  "IDEA(i)")))
 
 (setq org-todo-keyword-faces
       '(("TODO" . "red")
@@ -26,19 +30,21 @@
 (setq org-archive-location "archive/%s::")
 
 (setq org-agenda-files
-      '("~/org/doing.org" "~/org/drop.org" "~/org/radar.org" "~/org/shopify.org"))
+      '("~/org/doing.org"
+        "~/org/drop.org"
+        "~/org/radar.org"
+        "~/org/shopify.org"))
 
 (defun my/org-mode-open-notes ()
   (interactive)
-  (find-file org-notes-dir))
-
-(defun my/org-mode-open-doing ()
-  (interactive)
-  (find-file "~/org/doing.org"))
+  (let ((default-directory org-notes-dir))
+   (call-interactively #'find-file)))
 
 (defun my/org-mode-sync ()
   (interactive)
-  (start-process "Org Mode Sync" (get-buffer-create "*org-mode-sync*") "sync.sh"))
+  (start-process "Org Mode Sync"
+                 (get-buffer-create "*org-mode-sync*")
+                 "sync.sh"))
 
 (defun my/org-mode-initialize ()
   ;; (linum-mode -1)
@@ -48,17 +54,40 @@
 
 (defun my/org-mode-new-loose-sheet ()
   (interactive)
-  (let ((dir (pcase (calendar-current-date)
-               (`(,day ,month ,year)
-                (format "%s/notes/%d/%02d/%02d" org-notes-dir year month day)))))
+  (let* ((dir (pcase (calendar-current-date)
+                (`(,day ,month ,year)
+                 (format "%s/notes/%d/%02d/%02d" org-notes-dir year month day))))
+         (file (concat dir "/"
+                       (car (s-match "[0-9]+:[0-9]+:[0-9]+" (current-time-string)))
+                       ".org")))
     (shell-command-to-string (concat "mkdir -p " dir))
-    (find-file (concat dir "/" (car (s-match "[0-9]+:[0-9]+:[0-9]+" (current-time-string))) ".org"))))
+    (find-file file)
+    (add-hook 'after-save-hook
+              'my/org-mode-rename-file-from-title
+              0
+              t)))
+
+(defun my/org-mode-rename-file-from-title ()
+  (interactive)
+  (let ((title (save-excursion
+                 (ignore-errors
+                   (outline-up-heading 100 t))
+                 (cl-loop while (outline-previous-heading))
+                 (buffer-substring (+ (line-beginning-position) 2)
+                                   (line-end-position)))))
+    (rename-file-and-buffer
+     (concat
+      (->> title
+           (downcase)
+           (s-replace-all '((" " . "_")
+                            ("/" . "_"))))
+      "_" (file-name-base (buffer-file-name)) ".org"))))
 
 (add-hook 'org-mode-hook 'my/org-mode-initialize)
 
+(global-set-key (kbd "C-c a") 'org-agenda)
 (global-set-key (kbd "C-c n s") 'my/org-mode-open-notes)
-(global-set-key (kbd "C-c n d") 'my/org-mode-open-doing)
-(global-set-key (kbd "C-c a a") 'org-agenda)
+(global-set-key (kbd "C-c n n") 'my/org-mode-new-loose-sheet)
 ;; (global-set-key (kbd "M-s-<f10>") 'org-capture)
 
 (custom-set-faces
