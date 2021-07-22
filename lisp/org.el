@@ -41,6 +41,8 @@
   (start-process "Org Mode Sync" (get-buffer-create "*org-mode-sync*") "sync.sh"))
 
 (defun my/org-mode-initialize ()
+  ;; (linum-mode -1)
+  ;; (setq mode-line-format nil)
   (org-bullets-mode 1)
   (add-hook 'after-save-hook 'my/org-mode-sync t t))
 
@@ -52,13 +54,13 @@
 ;; (global-set-key (kbd "M-s-<f10>") 'org-capture)
 
 (custom-set-faces
-  '(org-level-1 ((t (:inherit outline-1 :height 1.0 :weight normal :underline nil :box nil :background nil))))
-  '(org-level-2 ((t (:inherit outline-2 :height 1.0 :weight normal :underline nil :box nil :background nil))))
-  '(org-level-3 ((t (:inherit outline-3 :height 1.0 :weight normal :underline nil :box nil :background nil))))
-  '(org-level-4 ((t (:inherit outline-4 :height 1.0 :weight normal :underline nil :box nil :background nil))))
-  '(org-level-5 ((t (:inherit outline-5 :height 1.0 :weight normal :underline nil :box nil :background nil))))
-  '(org-todo ((t (:background nil))))
-  '(org-done ((t (:background nil)))))
+ '(org-level-1 ((t (:inherit outline-1 :height 1.0 :weight normal :underline nil :box nil :background nil))))
+ '(org-level-2 ((t (:inherit outline-2 :height 1.0 :weight normal :underline nil :box nil :background nil))))
+ '(org-level-3 ((t (:inherit outline-3 :height 1.0 :weight normal :underline nil :box nil :background nil))))
+ '(org-level-4 ((t (:inherit outline-4 :height 1.0 :weight normal :underline nil :box nil :background nil))))
+ '(org-level-5 ((t (:inherit outline-5 :height 1.0 :weight normal :underline nil :box nil :background nil))))
+ '(org-todo ((t (:background nil))))
+ '(org-done ((t (:background nil)))))
 
 ;; (setq org-agenda-exporter-settings
 ;;       '((ps-number-of-columns 2)
@@ -71,3 +73,15 @@
 ;; (setq org-agenda-custom-commands
 ;;       `(("X" agenda "" nil ,(concat org-notes-dir "agenda.html"))
 ;;         ("Y" alltodo "" nil ,(concat org-notes-dir "todo.html"))))
+
+(defun recoll-search (query)
+  (interactive "sPrompt")
+  (let* ((proc
+          (start-process "*recoll*"
+                         (get-buffer-create "*recoll results*")
+                         "recoll" "-t" "-A" "-q" query))
+         (state (make-hash-table))
+         (sentinel (lambda (proc output)
+                     (with-current-buffer (process-buffer proc)
+                      (insert output)))))
+    (set-process-filter proc sentinel)))

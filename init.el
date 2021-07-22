@@ -86,7 +86,7 @@
 
 (column-number-mode)
 (fset 'yes-or-no-p 'y-or-n-p)
-(blink-cursor-mode nil)
+(blink-cursor-mode -1)
 ;; (setq-default cursor-type 'bar)
 (show-paren-mode t)
 (setq indent-tabs-mode nil)
